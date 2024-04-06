@@ -4,8 +4,8 @@ on:
 
 env:
     URL: ${{ secrets.URL }}
-    PAYLOAD: ${{ secrets.PAYLOAD }}
-    CREDS: ${{ secrets.CREDS }}
+    SECRET_PASSPHRASE_CREDS: ${{ secrets.SECRET_PASSPHRASE_CREDS }}
+    SECRET_PASSPHRASE_PAYLOAD: ${{ secrets.SECRET_PASSPHRASE_PAYLOAD }}
 
 jobs:
     Daily-Run:
@@ -13,6 +13,10 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+            - name: Decrypt creds
+              run: ./decrypt_creds.sh
+            - name: Decrypt payload
+              run: ./decrypt_payload.sh
             - name: Install Dependencies
               run: pip install -r requirements.txt 
             - name: Run App

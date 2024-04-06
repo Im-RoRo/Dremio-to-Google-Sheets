@@ -1,2 +1,4 @@
 env/
 .env
+secret_cred.json
+secret_payload.json

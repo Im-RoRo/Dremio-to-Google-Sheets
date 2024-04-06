@@ -10,10 +10,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 URL = os.getenv('URL')
+print(URL)
 HEADERS = {
     'Content-Type': 'application/json'
 }
-PAYLOAD = json.loads(os.environ['PAYLOAD'])
+with open('secret_payload.json', 'r') as file:
+    PAYLOAD = json.load(file)
 
 def export_data_from_dremio_to_google_sheets():
     #получаю данные от Dremio
@@ -28,7 +30,9 @@ def export_data_from_dremio_to_google_sheets():
     df_b = df[['ID', 'ID2', 'Title', 'URL', 'Image', 'Price', 'Currency', 'group_desc']].rename(columns={"group_desc": "Description"})
     df_c = df[['ID', 'ID2', 'Title', 'URL', 'Image', 'Price', 'Currency', 'desc_from_gpt']].rename(columns={"desc_from_gpt": "Description"})
     
-    creds = json.loads(os.environ['CREDS'])
+    with open('secret_cred.json', 'r') as file:
+        creds = json.load(file)
+
     #авторизация как сервис аккаунт
     gc = gspread.service_account_from_dict(creds)
     
