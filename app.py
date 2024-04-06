@@ -16,13 +16,10 @@ HEADERS = {
 }
 
 # Путь к расшифрованному файлу
-file_path = os.path.join(os.environ['HOME'], 'secrets', 'secret_payload.json')
+file_path = os.path.expanduser("~/secrets/secret_payload.json")
 
-try:
-    with open(file_path, 'r') as file:
-        PAYLOAD = json.load(file)
-except FileNotFoundError:
-    print(f"File {file_path} not found")
+with open(file_path, 'r') as file:
+    PAYLOAD = json.load(file)
     
 
 def export_data_from_dremio_to_google_sheets():
@@ -39,13 +36,10 @@ def export_data_from_dremio_to_google_sheets():
     df_c = df[['ID', 'ID2', 'Title', 'URL', 'Image', 'Price', 'Currency', 'desc_from_gpt']].rename(columns={"desc_from_gpt": "Description"})
     
     # Путь к расшифрованному файлу
-    file_path = os.path.join(os.environ['HOME'], 'secrets', 'secret_creds.json')
+    file_path = os.path.expanduser("~/secrets/secret_creds.json")
 
-    try:
-        with open(file_path, 'r') as file:
-            creds = json.load(file)
-    except FileNotFoundError:
-        print(f"File {file_path} not found")
+    with open(file_path, 'r') as file:
+        creds = json.load(file)
 
     #авторизация как сервис аккаунт
     gc = gspread.service_account_from_dict(creds)
