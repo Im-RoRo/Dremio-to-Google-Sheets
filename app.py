@@ -3,7 +3,7 @@ import pandas as pd
 import gspread
 import os
 import json
-from datetime import datetime
+import datetime
 from dotenv import load_dotenv
 
 
@@ -46,7 +46,6 @@ def export_data_from_dremio_to_google_sheets():
     
     wks = gc.open("feed_for_yandex")
     last_update = wks.worksheet("date_last_update")
-    test = wks.worksheet("test")
     feed_a = wks.worksheet("feed_a")
     feed_b = wks.worksheet("feed_b")
     feed_c = wks.worksheet("feed_c")
@@ -57,7 +56,7 @@ def export_data_from_dremio_to_google_sheets():
     feed_b.clear()
     feed_c.clear()
     
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = (datetime.datetime.now() + datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M:%S")
     #загружаю новые данные
     last_update.update([[now]], 'A1')
     feed_a.update([df_a.columns.values.tolist()] + df_a.values.tolist())
