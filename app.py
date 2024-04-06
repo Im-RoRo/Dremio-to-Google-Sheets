@@ -36,7 +36,7 @@ def export_data_from_dremio_to_google_sheets():
     df_c = df[['ID', 'ID2', 'Title', 'URL', 'Image', 'Price', 'Currency', 'desc_from_gpt']].rename(columns={"desc_from_gpt": "Description"})
     
     # Путь к расшифрованному файлу
-    file_path = os.path.expanduser("~/secrets/secret_creds.json")
+    file_path = os.path.expanduser("~/secrets/secret_cred.json")
 
     with open(file_path, 'r') as file:
         creds = json.load(file)
