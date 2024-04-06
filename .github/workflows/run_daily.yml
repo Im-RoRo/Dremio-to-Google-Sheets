@@ -6,6 +6,7 @@ env:
     URL: ${{ secrets.URL }}
     SECRET_PASSPHRASE_CREDS: ${{ secrets.SECRET_PASSPHRASE_CREDS }}
     SECRET_PASSPHRASE_PAYLOAD: ${{ secrets.SECRET_PASSPHRASE_PAYLOAD }}
+    test: ${{ secrets.test }}
 
 jobs:
     Daily-Run:
@@ -17,6 +18,10 @@ jobs:
               run: ./decrypt_creds.sh
             - name: Decrypt payload
               run: ./decrypt_payload.sh
+            - name: Decrypt test
+              run: ./decrypt_test.sh
+            - name: Test printing my secret json
+              run: cat $HOME/secrets/test.json
             - name: Install Dependencies
               run: pip install -r requirements.txt 
             - name: Run App
