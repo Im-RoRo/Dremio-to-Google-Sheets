@@ -1,7 +1,7 @@
 name: Run daily
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '40 5 * * *'
 
 env:
     URL: ${{ secrets.URL }}

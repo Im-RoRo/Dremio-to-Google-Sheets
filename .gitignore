@@ -2,4 +2,9 @@ env/
 .env
 secret_cred.json
 secret_payload.json
-test.json
+payloads_for_check_problems.json
+workflow.ipynb
+constants.py
+create_new_desc.py
+data.json
+/untils
