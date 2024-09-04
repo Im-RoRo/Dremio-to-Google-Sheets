@@ -21,7 +21,7 @@ with open(file_path, 'r') as file:
 
 def export_data_from_dremio_to_google_sheets():
     #получаю данные от Dremio test
-    response = requests.post(URL, headers=HEADERS, json=PAYLOADS["test"])
+    response = requests.post(URL, headers=HEADERS, json=PAYLOADS["test"], timeout=10)
     if response.status_code == 200:
         data = response.json()
     else:
